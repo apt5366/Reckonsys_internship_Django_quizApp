@@ -1,0 +1,12 @@
+<!-- Student Score: {{student.student_score}}  -->
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+        <li>{{ question.question_text }} <br>
+        Correct Answer -> {{question.display_answer}}  
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Questions are available for this quiz. Please try next Quiz.</p>
+{% endif %}

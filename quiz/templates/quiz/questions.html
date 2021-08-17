@@ -1,0 +1,12 @@
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+    <li><a href="{% url 'quiz:detail' question_id=question.id student_id=student.id  %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Questions are available for this quiz. Please try next Quiz.</p>
+{% endif %}
+<a href="{% url 'quiz:submit' student.id %}">
+    <button>Submit</button>
+</a>
