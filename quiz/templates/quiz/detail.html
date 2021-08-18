@@ -1,6 +1,30 @@
 {% extends 'quiz/dependencies.html' %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/detail.css' %}">
+
+
+<form action="{% url 'quiz:checkAns' question_id=question.id student_id=student.id %}" method="post">
+    {% csrf_token %}
+    <div class="test col-md-6 col-md-offset-3">
+        <h2 class="title">{{ question.question_text }}</h2>
+
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+        <div class="choices">    
+        {% for choice in question.choice_set.all %}
+            <div class="choice">
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}" ><span class="glyphicon glyphicon-ok"></span>{{ choice.choice_text }}</label><br>
+            </div>
+        {% endfor %}
+        </div>
+        </div>
+    <input type="submit" value="Update choice and go to Overview">
+</form>
+
+<!-- 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/detail.css' %}">
 
 
 {% block content %}
@@ -18,4 +42,8 @@
 </form>
 
 
-{% endblock %}
+{% endblock %} -->
+
+
+<!-- references: https://codepen.io/bramus/pen/OJPQmpo -->
+

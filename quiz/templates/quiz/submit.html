@@ -5,13 +5,13 @@
 {% block content %}
 <h1>Student Score : {{student.student_score}} </h1>
 {% if question_list %}
-    <ul>
+    <ol class="gradient-list">
     {% for question in question_list %}
         <li>{{ question.question_text }} <br>
         Correct Answer -> {{question.display_answer}}  
         </li>
     {% endfor %}
-    </ul>
+    </ol>
 {% else %}
     <p>No Questions are available for this quiz. Please try next Quiz.</p>
 {% endif %}

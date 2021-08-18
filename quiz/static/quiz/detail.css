@@ -1,0 +1,116 @@
+/* references : https://codepen.io/jamesfoster/pen/aGhip */
+
+body {
+    padding-top: 30px;
+  }
+  .test > .title {
+    text-decoration: underline;
+  }
+  .test > .module:before {
+    content: 'Module:';
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  .test > .level:before {
+    content: 'Level:';
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  .test .question .choices {
+    min-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .test .question .choices .choice {
+    position: relative;
+  }
+  .test .question .choices .choice input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+  }
+  .test .question .choices .choice label {
+    font-weight: normal;
+    cursor: pointer;
+    display: block;
+    padding: 9px;
+    border-radius: 5px;
+    background: #ddd;
+  }
+  .test .question .choices .choice label:hover {
+    background: #8d8;
+  }
+  .test .question .choices .choice label .glyphicon {
+    margin-right: 8px;
+    color: #888;
+  }
+  .test .question .choices .choice input:checked + label {
+    background: #3c3;
+  }
+  .test .question .choices .choice input:checked + label .glyphicon {
+    color: #fff;
+  }
+  .test #feedback {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 9px;
+    margin-bottom: 10px;
+  }
+  .test #feedback button {
+    text-align: right;
+    display: block;
+  }
+  .test #feedback .header a {
+    display: block;
+    margin: -9px;
+    padding: 9px;
+    text-align: right;
+  }
+  .test #feedback .header a > .glyphicon {
+    margin-left: 10px;
+  }
+  .test #feedback .header a .when-open {
+    display: inline;
+  }
+  .test #feedback .header a .when-closed {
+    display: none;
+  }
+  .test #feedback .header a.collapsed .when-open {
+    display: none;
+  }
+  .test #feedback .header a.collapsed .when-closed {
+    display: inline;
+  }
+  .test #feedback .body .thumbs {
+    position: relative;
+  }
+  .test #feedback .body .thumbs input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+  }
+  .test #feedback .body .thumbs label {
+    border: 1px solid #aaa;
+  }
+  .test #feedback .body .thumbs label[for=thumbs-up] {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .test #feedback .body .thumbs label[for=thumbs-down] {
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .test #feedback .body .thumbs .glyphicon {
+    padding: 10px;
+  }
+  .test #feedback .body .thumbs input:checked + label {
+    color: #fff;
+  }
+  .test #feedback .body .thumbs input:checked + label[for=thumbs-up] {
+    background: #3b3;
+  }
+  .test #feedback .body .thumbs input:checked + label[for=thumbs-down] {
+    background: #f66;
+  }
+  .test #feedback .body .comments {
+    margin-top: 5px;
+  }
