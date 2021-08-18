@@ -6,13 +6,12 @@ from django.urls import reverse
 from .models import Choice, Question, Student
 
 def index(request):
-    # ###### how to start with Student here
     # question_list = Question.objects.all()
     # context = {'question_list': question_list}
     return render(request, 'quiz/index.html')
 
 def login_request(request): #
-    ###### how to get  Student here
+
     # question = get_object_or_404(Question, pk=question_id)
 
     valid=0 # indicates whether login was success or failure 
@@ -34,32 +33,45 @@ def login_request(request): #
             'error_message': "Incorrect password entered. Please try again.",
         })
         else: 
+            student.student_score=0 # Sets student score counter to 0 for a fresh start to the Quiz
+            student.save()
+
+            # Setting all questions attempted to 0 at the starting of a new quiz session
+            question_list = Question.objects.all()
+
+            for q in question_list:
+                q.q_attempted = 0 #indicates that questions has not been attempted once as this is start of new Quiz session 
+                q.save() 
+                
+
             return HttpResponseRedirect(reverse('quiz:questions', args=(student.id,)))
 
 
 
 
 def questions(request, student_id):
-    ###### how to start with Student here
+
     question_list = Question.objects.all()
     # context = {'question_list': question_list}
     student= get_object_or_404(Student, pk=student_id)
+
     print('<<<<<< ....Student ID is %s  ' % student_id)
     context = {'question_list': question_list, 'student' : student}
     return render(request, 'quiz/questions.html', context)
 
 
 def detail(request, question_id, student_id):
+    student= get_object_or_404(Student, pk=student_id)
     try:
-        ###### how to get  Student here
+
         question = Question.objects.get(pk=question_id)
         
     except Question.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'quiz/detail.html', {'question': question})
+    return render(request, 'quiz/detail.html', {'question': question ,'student' : student })
 
 def checkAns(request, question_id, student_id): #checks whether the answer attempted is correct or not, and increments StudnetScore accordingly
-    ###### how to get  Student here
+
     question = get_object_or_404(Question, pk=question_id)
     student=get_object_or_404(Student,pk=student_id)
 
@@ -69,30 +81,34 @@ def checkAns(request, question_id, student_id): #checks whether the answer attem
         # Redisplay the question form.
         return render(request, 'quiz/detail.html', {
             'question': question,
+            'student' : student,
             'error_message': "You didn't select a choice.",
         })
     else:
-        question.q_attempted = 1 #indicates that questions has been attempted once so score should be incr or decr accordingly
-        question.save()
+        
 
         #answer indicates whether attempt was correct or not 
         answer = 1 if (selected_choice==question.right_choice) else 0 
 
         if(answer==1): # answer correct
             if(question.q_attempted==0): # Qn was not previosuly attempted
-                student.student_score += 10 #Student gets 10 points
+                student.student_score =student.student_score + 10 #Student gets 10 points
                 student.save()
             #No else cauz it was prev attempted and it was correct so No change in score
         else: # Answer wrong in this attempt
             if(question.q_attempted==1): # Qn WAS previously attempted
-                student.student_score -= 10 #Student looses 10 points as he/she has modified their answer
+                student.student_score =student.student_score-10 #Student looses 10 points as he/she has modified their answer
                 student.save()
             # No else cauz it was not prev attempted and it isnt correct now, so No change in score
-        return HttpResponseRedirect(reverse('quiz:questions', args=()))
+        
+        question.q_attempted = 1 #indicates that questions has been attempted once so score should be incr or decr accordingly
+        question.save()
+
+        return HttpResponseRedirect(reverse('quiz:questions', args=(student.id,)))
         # return HttpResponseRedirect(reverse('quiz:index', args=(question.id,)))
 
 def submit(request, student_id):
-    # student=
+    
     # question = get_object_or_404(Question, pk=question_id)
 
     student=get_object_or_404(Student,pk=student_id)
