@@ -42,7 +42,10 @@ def login_request(request): #
 def questions(request, student_id):
     ###### how to start with Student here
     question_list = Question.objects.all()
-    context = {'question_list': question_list}
+    # context = {'question_list': question_list}
+    student= get_object_or_404(Student, pk=student_id)
+    print('<<<<<< ....Student ID is %s  ' % student_id)
+    context = {'question_list': question_list, 'student' : student}
     return render(request, 'quiz/questions.html', context)
 
 
@@ -94,7 +97,8 @@ def submit(request, student_id):
 
     student=get_object_or_404(Student,pk=student_id)
     question_list = Question.objects.all()
-    return render(request, 'quiz/submit.html', {'question_list': question_list}, {'student':student})
+    context = {'question_list': question_list, 'student' : student}
+    return render(request, 'quiz/submit.html', context)
 
 
     
