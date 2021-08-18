@@ -1,14 +1,17 @@
+<!-- references: https://codepen.io/Markshall/pen/ZEQBKpb -->
+
 {% extends 'quiz/dependencies.html' %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
 
 {% block content %}
 {% if question_list %}
-    <ul>
+    
+    <ol class="gradient-list">
     {% for question in question_list %}
     <li><a href="{% url 'quiz:detail' question_id=question.id student_id=student.id  %}">{{ question.question_text }}</a></li>
     {% endfor %}
-    </ul>
+    </ol>
 {% else %}
     <p>No Questions are available for this quiz. Please try next Quiz.</p>
 {% endif %}
