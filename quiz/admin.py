@@ -8,6 +8,7 @@ class ChoiceInline(admin.TabularInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
+        (None, {'fields': ['question_text']}),
         ('Correct Answer',      {'fields': ['right_choice']}), 
         ('Question Attempted By Student Yet (0-No, 1- Yes)', {'fields': ['q_attempted'], 'classes':
         ['collapse']})
