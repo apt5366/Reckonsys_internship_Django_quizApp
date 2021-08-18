@@ -1,4 +1,8 @@
-<!-- Student Score: {{student.student_score}}  -->
+{% extends 'quiz/dependencies.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
+
+{% block content %}
 <h1>Student Score : {{student.student_score}} </h1>
 {% if question_list %}
     <ul>
@@ -11,3 +15,9 @@
 {% else %}
     <p>No Questions are available for this quiz. Please try next Quiz.</p>
 {% endif %}
+
+<a href="{% url 'quiz:index' %}">
+    <button>Logout</button>
+</a>
+
+{% endblock %}

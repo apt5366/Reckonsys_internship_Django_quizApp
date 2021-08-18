@@ -1,3 +1,9 @@
+{% extends 'quiz/dependencies.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
+
+
+{% block content %}
 <form action="{% url 'quiz:checkAns' question_id=question.id student_id=student.id %}" method="post">
     {% csrf_token %}
     <fieldset>
@@ -9,4 +15,7 @@
         {% endfor %}
     </fieldset>
     <input type="submit" value="Update choice and go to Overview">
-    </form>
+</form>
+
+
+{% endblock %}

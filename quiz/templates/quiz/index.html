@@ -1,3 +1,8 @@
+{% extends 'quiz/dependencies.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
+
+{% block content %}
 <form action="{% url 'quiz:login_request'  %}" method="post">
     {% csrf_token %}
     <fieldset>
@@ -11,3 +16,5 @@
     </fieldset>
     <input type="submit" value="Login">
     </form>
+    
+{% endblock %}

@@ -1,3 +1,8 @@
+{% extends 'quiz/dependencies.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
+
+{% block content %}
 {% if question_list %}
     <ul>
     {% for question in question_list %}
@@ -10,3 +15,5 @@
 <a href="{% url 'quiz:submit' student_id=student.id %}">
     <button>Submit</button>
 </a>
+
+{% endblock %}
