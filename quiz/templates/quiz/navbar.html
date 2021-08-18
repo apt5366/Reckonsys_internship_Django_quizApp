@@ -1,3 +1,6 @@
+<!-- references : https://data-flair.training/blogs/create-quiz-application-python-django/ -->
+
+
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'quiz/style.css' %}">
 
@@ -16,10 +19,11 @@
   <div class="collapse navbar-collapse" id="navbarNav">
 
     <ul class="navbar-nav">
+        
     
     </ul>
   </div>
 
-  <span class="greet">Hello, {{request.user}}</span>
+  <span class="greet">Hello, {{student.student_name}}</span>
 
 </nav>
